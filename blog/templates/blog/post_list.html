@@ -1,60 +1,13 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>My blog</title>
-    </head>    
-    <body>
-        <header>
-                <h1>Eating Well</h1>
-        <h2>Welcome to my blog!</h2>
-        </header>
-       
-        <main>
+{% extends 'blog/base.html' %}
 
-            {% for post in posts %}
-                <article>
-                <time>published: {{ post.published_date }}</time>
-                <h2><a href="">{{ post.title }}</a></h2>
-                <p>{{ post.text|linebreaksbr }}</p>
-                </article>
-            {% endfor %}
-            
-        <h2>Introduction</h2>
-        <p>This is a simple blog about healthy eating. However, change in food production and food systems, rapid urbanization and changing lifestyles have led to a shift in dietary patterns.
-             People are now consuming more highly processed foods high in unhealthy fats, free sugars and salt/sodium, and many people do not eat enough fruit and vegetables or consume sufficient dietary fibre.
-             The exact make-up of a diversified, balanced and healthy diet will vary depending on individual characteristics (e.g. age, gender, lifestyle and degree of physical activity), cultural context, locally-available foods and dietary customs </p>
-        
-       
-        <h2 id="benefits">Benefits of Healthy Eating</h2>
-        <p>Eating a healthy diet can help you to maintain a healthy weight, reduce your
-    risk of heart disease and stroke, prevent some types of cancer, and have a positive effect on your mood and energy levels.</p>
-        <h2 id="tips">Tips for Healthy Eating</h2>
-        <p>Here are some tips to help you eat a healthy diet:</p>
-        <ul>
-            <li>Eat a variety of foods, including plenty of fruits and vegetables.</li>
-            <li>Choose whole grains instead of refined grains.</li>
-            <li>Limit your intake of saturated and trans fats, added sugars, and sodium.</li>
-            <li>Drink plenty of water and limit sugary drinks.</li>     
-            <li>Plan your meals and snacks ahead of time to make healthier choices.</li>
-        </ul>
-        <h2 id=""Tips for Healthy Eating">Healthy Eating on a Budget</h2>
-        <p>Eating healthy doesn't have to be expensive. Here are some tips for eating healthy on a budget:</p>
-        <ul>
-            <li>Plan your meals and make a shopping list to avoid impulse purchases.</li>
-            <li>Buy in bulk and freeze leftovers for later.</li>
-            <li>Choose seasonal fruits and vegetables, which are often cheaper.</li>
-            <li>Cook at home instead of eating out, which can be more expensive.</li>      </ul>
-        <h2 id="conclusion">Conclusion</h2>
-        <p>Eating a healthy diet is an important part of maintaining good health and preventing chronic diseases. By following the tips outlined in this blog, you can make healthier choices and improve your overall well-being.</p>
-
-        <h3 id="resources">Resources</h3>
-        <a href="https://www.eatingwell.com/">https://www.eatingwell.com/</a>
-
-        </main>
-        <footer>
-            <p>Copyright 2024 Eating Well</p>   
-        
-
-        
-    </body>
-</html>
+{% block content %}
+    {% for post in posts %}
+        <article class="post">
+            <time class="date">
+                {{ post.published_date }}
+            </time>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </article>
+    {% endfor %}
+{% endblock %}
